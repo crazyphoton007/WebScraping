@@ -1,0 +1,49 @@
+Python Web Scraping
+
+Install Scrapy using below command :
+pip install Scrapy
+
+Open CMD and type "Scrapy" to see available commands under it and also its version.
+
+bench - used to figure out the performance of your spider code.
+fetch - Fetch or open URL with Scapy.
+genspider - to create a spider using pre-defined template. There are other crawl template to scrape full sites.
+shell - most imp feature of scrapy used to test out the project and see if datapoint is there. Basically to test our code in small pieces.
+startproject - Create new project.
+view - This is also Highly used command as this shows what exactly the scrapy sees. Sometimes normal site and what scrapy sees doesn't match.
+
+Start with creating a project:
+-> scrapy startproject quotes_spider
+Navigate to quotes_spider folder:
+-> cd quotes_spider
+Verify the project:
+-> scrapy
+Create two spiders, which will be present under spider folder: genspider contains two inputs - spider name or domain/site name.
+-> scrapy genspider quotes quotes.toscrape.com
+-> scrapy genspider example example.com
+Once spider project is created quotes.py and example.py file will be created unser spider folder with default template.
+
+To see what all spiders are present:
+-> scrapy list
+
+--======================================================================
+-> scrapy shell
+-> fetch("http://quotes.toscrape.com")
+-> response
+-> response.css('h1')
+-> response.css('h1::text')
+-> response.xpath('h1')
+-> response.xpath('//h1')
+-> response.xpath('//h1/a')
+-> response.xpath('//h1/a/text()')
+-> response.xpath('//h1/a/text()').extract() - To get result without selector
+-> response.xpath('//h1/a/text()').extract_first() - To get result without selector and []
+
+--=======================================================================
+-> response.xpath('//*[@class="tag"]') - To fetch selector with class = "tag"
+-> response.xpath('//*[@class="tag-item"]') - To fetch selector with class = "tag-item"
+-> len(response.xpath('//*[@class="tag-item"]')) - To fetch length of selector elements
+
+h1_tag = response.xpath('//h1/a/text()').extract_first()
+		tags = response.xpath('//*[@class="tag-item"]/a/text()').extract()
+		yield {'H1 tag' : h1_tags, 'Tags' : tags}
